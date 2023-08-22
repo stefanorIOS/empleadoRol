@@ -5,7 +5,6 @@ import java.util.LinkedList;
 import Entities.Empleado;
 //import entities.Empleado;
 import Entities.Rol;
-import Data.DbConnector;
 
 
 public class RolDAO {

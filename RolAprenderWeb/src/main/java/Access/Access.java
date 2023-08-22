@@ -14,6 +14,7 @@ public class Access {
 	public static void main(String[] args) {
 		
 		Scanner scanner = new Scanner(System.in);
+		Rol r = new Rol();
 		/*
 		System.out.println("Aquí verá una lista de los empleados y sus roles");
 		
