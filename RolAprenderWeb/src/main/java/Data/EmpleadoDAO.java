@@ -7,7 +7,6 @@ import java.sql.Statement;
 import java.util.LinkedList;
 
 import Entities.Empleado;
-import Entities.Rol;
 
 public class EmpleadoDAO {
 	
