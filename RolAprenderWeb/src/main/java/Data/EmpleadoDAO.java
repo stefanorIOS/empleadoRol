@@ -1,6 +1,7 @@
 package Data;
 
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -56,4 +57,46 @@ public class EmpleadoDAO {
 		return empleados;
 
 	}
+	
+	public Empleado login(Empleado emp) {
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		Empleado e = null;
+		try {
+			stmt = DbConnector.getInstancia().getConn().prepareStatement("Select dni_empleado,nombre, apellido from empleado WHERE dni_empleado=? and nombre=?");
+
+			stmt.setString(1, emp.getDni());
+			stmt.setString(2, emp.getNombre());
+
+			rs = stmt.executeQuery();
+
+			if (rs != null & rs.next()) {
+
+				e = new Empleado();
+				e.setDni(rs.getString("dni_empleado"));
+				e.setNombre(rs.getString("nombre"));
+				e.setApellido(rs.getString("apellido"));
+			}
+
+		} catch (SQLException ex) {
+			ex.printStackTrace();
+
+		} finally {
+			try {
+				if (rs != null) {
+					rs.close();
+				}
+				if (stmt != null) {
+					stmt.close();
+				}
+				DbConnector.getInstancia().releaseConn();
+			} catch (SQLException ex) {
+				ex.printStackTrace();
+			}
+		}
+
+		return e;
+	}
+	
+	
 }
