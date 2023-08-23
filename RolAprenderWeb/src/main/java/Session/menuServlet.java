@@ -1,6 +1,6 @@
 package Session;
 
-
+import java.io.PrintStream;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -35,7 +35,12 @@ public class menuServlet extends HttpServlet {
 		Empleado usuario = (Empleado) session.getAttribute("usuario");
 		
 		if (usuario == null) {
-			//15:17
+			request.getRequestDispatcher("noFound.html").forward(request, response);
+		}
+		else {
+			
+			request.setAttribute("usuario", usuario);
+			request.getRequestDispatcher("WEB-INF/infoUser.jsp").forward(request, response);
 		}
 		
 	}
