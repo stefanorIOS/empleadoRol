@@ -1,6 +1,5 @@
 package Session;
 
-import java.io.PrintStream;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,16 +11,16 @@ import javax.servlet.http.HttpSession;
 import Entities.Empleado;
 
 /**
- * Servlet implementation class validarServlet
+ * Servlet implementation class cerrarSesAut
  */
-@WebServlet("/menuServlet")
-public class menuServlet extends HttpServlet {
+@WebServlet("/cerrarSesAut")
+public class cerrarSesAut extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public menuServlet() {
+    public cerrarSesAut() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,27 +28,22 @@ public class menuServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		//recuperamos la session de nuevo
-		HttpSession session = request.getSession(); 
-		//recuperamos el objeto enviado en el "validarSesion" (servlet)
-		Empleado usuario = (Empleado) session.getAttribute("usuario");
+		HttpSession session = request.getSession();
+		session.removeAttribute("usuario");
 		
-		if (usuario == null) {
-			request.getRequestDispatcher("noFound.html").forward(request, response);
-		}
-		else {
-			
-			//aqui enviamos el usuario al jsp como atributo
-			request.setAttribute("usuario", usuario);
-			//aqui trataremos de enviar la sesion para obtener el atributo
-			session.setAttribute("usuario", usuario);
-			request.getRequestDispatcher("WEB-INF/infoUser.jsp").forward(request, response);
-		}
+		
+		// si hago esto me deja ir correctamente, pq la session sigue abierta y sigo pasando datos ...
+		//Empleado usuario = (Empleado) session.getAttribute("usuario");
+		//session.setAttribute("usuario", usuario);
+		//request.getRequestDispatcher("WEB-INF/infoUser.jsp").forward(request, response);
+		
+		
+		//con el flujo de datos normal, tengo q ir acá, pues si voy al jsp, y trato de recurar la sesion ya no existe.
+		request.getRequestDispatcher("despedida.html").forward(request, response);
 		
 	}
-
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */

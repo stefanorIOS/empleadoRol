@@ -30,7 +30,8 @@ public class cerrarSessionServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
 		session.removeAttribute("usuario");
-		request.getRequestDispatcher("index4.html").forward(request, response);
+		// en el momento q saco usuario de la session se manda automaticamente a 
+		request.getRequestDispatcher("WEB-INF/infoUser.jsp").forward(request, response);
 		
 		
 	}

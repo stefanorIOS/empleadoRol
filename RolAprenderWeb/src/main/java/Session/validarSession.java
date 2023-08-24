@@ -42,7 +42,7 @@ public class validarSession extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
+		//recuperamos los datos ingresados en el formulario "index.2"
 		String nombre = request.getParameter("nombre");
 		String dni = request.getParameter("dni");
 		
@@ -56,11 +56,13 @@ public class validarSession extends HttpServlet {
 		
 		
 		
-		
+		// Si el empleado es encontrado, iniciamos objeto session yenviamos el atributo emp, con el 
+		//nombre de usuario para el siguiente servlet
 		if (emp != null) {
 			HttpSession session = request.getSession();
 			session.setAttribute("usuario", emp);
 			//request.getSession().setAttribute("empleado", emp);
+			//si pasa todo esto, nos vamos a menu servlet
 			request.getRequestDispatcher("menuServlet").forward(request, response);
 			
 		} else {

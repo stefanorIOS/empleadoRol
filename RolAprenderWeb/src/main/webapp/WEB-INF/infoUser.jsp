@@ -8,7 +8,11 @@
 <title>Welcome to the JSP</title>
 
 <% Empleado p1 = new Empleado(); %> 
-<% p1 = (Empleado) request.getAttribute("usuario"); %>
+<%-- Aqui recupero el atributo como si fuera un atributo pasado, no una session --%>
+
+<%-- <%  p1 = (Empleado) request.getAttribute("usuario"); %> --%> 
+
+ <% p1 = (Empleado) session.getAttribute("usuario"); %>  
 
 
 
@@ -18,7 +22,7 @@
 	<h1><%=p1.getNombre()%></h1>
 	<h1><%=p1.getDni()%></h1>
 	
-	 <a class="btn btn-info" role="button" href="cerrarSessionServlet">Cierre session</a>
+	 <a class="btn btn-info" role="button" href="cerrarSesAut">Cierre session</a>
 
 </body>
 </html>
